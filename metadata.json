@@ -1,0 +1,8 @@
+{
+  "name": "WellnessSynergy",
+  "description": "A premium, Apple-inspired wellness dashboard featuring cinematic animations, personalized AI insights, and holistic health tracking.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
