@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Trends = ({ user }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ const Trends = ({ user }) => {
 
     const fetchTrends = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/fitness/trends?email=${encodeURIComponent(user.email)}`);
+        const response = await fetch(`${API_URL}/api/fitness/trends?email=${encodeURIComponent(user.email)}`);
         const json = await response.json();
         if (response.ok && json.data) {
           // Format date for display

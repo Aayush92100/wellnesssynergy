@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Settings = ({ user }) => {
   const [isConnected, setIsConnected] = useState(user?.mobileDeviceConnected || false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -22,7 +24,7 @@ const Settings = ({ user }) => {
 
         if (userConfirmed) {
           // Tell backend we officially want to connect before authorizing
-          const connectResponse = await fetch('http://localhost:5000/api/fitness/connect', {
+          const connectResponse = await fetch(`${API_URL}/api/fitness/connect`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: user.email, connect: true }),
@@ -46,7 +48,7 @@ const Settings = ({ user }) => {
             setIsUpdating(false);
           } else {
             // Redirect to Google OAuth for fitness data
-            const response = await fetch('http://localhost:5000/api/auth/google/url');
+            const response = await fetch(`${API_URL}/api/auth/google/url`);
             if (response.ok) {
               const data = await response.json();
               if (data.url) {
@@ -65,7 +67,7 @@ const Settings = ({ user }) => {
         }
       } else {
         // Disconnecting flow
-        const response = await fetch('http://localhost:5000/api/fitness/connect', {
+        const response = await fetch(`${API_URL}/api/fitness/connect`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: user.email, connect: false }),

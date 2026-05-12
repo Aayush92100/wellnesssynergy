@@ -3,6 +3,8 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { View } from '../types';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Sidebar = ({ activeView, setActiveView, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -52,7 +54,7 @@ const Sidebar = ({ activeView, setActiveView, user }) => {
     formData.append('email', user.email);
 
     try {
-      const response = await fetch('http://localhost:5000/api/user/upload-avatar', {
+      const response = await fetch(`${API_URL}/api/user/upload-avatar`, {
         method: 'POST',
         body: formData,
       });

@@ -1,0 +1,15 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "env": [
+    {
+      "key": "VITE_API_URL",
+      "description": "Backend API URL - use Render URL in production"
+    },
+    {
+      "key": "VITE_GOOGLE_CLIENT_ID",
+      "description": "Google OAuth Client ID"
+    }
+  ]
+}

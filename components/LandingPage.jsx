@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { View } from '../types';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const LandingPage = ({ onEnter }) => {
   const [activeModal, setActiveModal] = useState(null);
   const [authMode, setAuthMode] = useState('login');
@@ -26,7 +28,7 @@ const LandingPage = ({ onEnter }) => {
   const handleAuthSubmit = async (e) => {
     e.preventDefault();
     setAuthError('');
-    const endpoint = authMode === 'login' ? 'http://localhost:5000/api/auth/login' : 'http://localhost:5000/api/auth/register';
+    const endpoint = authMode === 'login' ? `${API_URL}/api/auth/login` : `${API_URL}/api/auth/register`;
 
     try {
       const response = await fetch(endpoint, {
@@ -50,7 +52,7 @@ const LandingPage = ({ onEnter }) => {
 
   const handleGoogleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/google/url');
+      const response = await fetch(`${API_URL}/api/auth/google/url`);
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url;
